@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>豆花療癒學：手作古早味與數位微創業｜彰化社區大學</title>
+  <!-- 載入 Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 載入 Google Fonts: Noto Serif TC 與 Noto Sans TC -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700;900&display=swap" rel="stylesheet">
+  <!-- 載入 Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            soy: {
+              bg: '#FDFBF7',       // 黃豆米白
+              card: '#FFFFFF',     // 純白豆花質地
+              soft: '#F5EFE6',     // 暖豆漿米色
+              border: '#E6DCCD',   // 溫潤邊框
+              caramel: '#7C4D2B',  // 黑糖焦糖棕
+              amber: '#E68A2E',    // 暖陽橘金
+              cocoa: '#2D241E',    // 深焙可可文字色
+              muted: '#6B5B4F',    // 次要柔和文字
+            }
+          },
+          fontFamily: {
+            sans: ['"Noto Sans TC"', 'sans-serif'],
+            serif: ['"Noto Serif TC"', 'serif'],
+          },
+          boxShadow: {
+            'warm': '0 10px 30px -10px rgba(124, 77, 43, 0.12)',
+            'warm-hover': '0 16px 36px -10px rgba(124, 77, 43, 0.2)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* 自訂捲軸與列印樣式 */
+    body {
+      background-color: #FDFBF7;
+      color: #2D241E;
+      background-image: radial-gradient(#E6DCCD 0.75px, transparent 0.75px);
+      background-size: 24px 24px;
+    }
+
+    @media print {
+      body {
+        background: #FFFFFF !important;
+        background-image: none !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-break-inside {
+        break-inside: avoid;
+      }
+      .shadow-warm {
+        box-shadow: none !important;
+        border: 1px solid #D6C7B2 !important;
+      }
+    }
+  </style>
+</head>
+<body class="font-sans antialiased selection:bg-soy-amber/20 selection:text-soy-caramel">
+
+  <!-- 頂部導覽與快捷操作列 -->
+  <header class="sticky top-0 z-40 bg-soy-bg/90 backdrop-blur-md border-b border-soy-border no-print">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5">
+        <!-- 豆花碗 SVG 圖標 -->
+        <div class="w-9 h-9 rounded-full bg-soy-caramel text-soy-bg flex items-center justify-center shadow-sm shrink-0">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 11h18a0 0 0 0 1 0 0 9 9 0 0 1-9 9 9 9 0 0 1-9-9 0 0 0 0 1 0 0Z"/>
+            <path d="M7 11c0-2 2-3 5-3s5 1 5 3"/>
+            <path d="M9 5c0-1 .5-1.5 1-2"/>
+            <path d="M14 5c0-1 .5-1.5 1-2"/>
+          </svg>
+        </div>
+        <span class="font-serif font-bold text-soy-caramel text-base sm:text-lg tracking-wide truncate">
+          彰化社區大學｜課程企劃
+        </span>
+      </div>
+
+      <!-- 實用工具按鈕 -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button onclick="copySourceCode()" class="inline-flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 rounded-xl bg-soy-soft hover:bg-soy-border/60 text-soy-caramel font-medium text-xs sm:text-sm transition-all border border-soy-border active:scale-95">
+          <i data-lucide="code-2" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">一鍵複製完整HTML原始碼</span>
+          <span class="sm:hidden">複製原始碼</span>
+        </button>
+        <button onclick="window.print()" class="inline-flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 rounded-xl bg-soy-caramel hover:bg-soy-caramel/90 text-white font-medium text-xs sm:text-sm shadow-sm transition-all active:scale-95">
+          <i data-lucide="printer" class="w-4 h-4"></i>
+          <span class="hidden sm:inline">列印 / 匯出課表</span>
+          <span class="sm:hidden">列印課表</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. 標題區（Hero Section） -->
+  <section class="relative overflow-hidden pt-10 pb-14 sm:pt-16 sm:pb-20 px-4 sm:px-6 lg:px-8">
+    <!-- 裝飾性背景光暈 -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-72 bg-gradient-to-b from-soy-amber/15 via-soy-soft/40 to-transparent rounded-full blur-3xl -z-10"></div>
+
+    <div class="max-w-4xl mx-auto text-center">
+      <!-- 單位標籤 -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-soy-soft border border-soy-border text-soy-caramel text-xs sm:text-sm font-medium mb-6 shadow-sm">
+        <i data-lucide="sparkles" class="w-4 h-4 text-soy-amber"></i>
+        <span>彰化社區大學｜18週跨齡共學課程（適合20至80歲）</span>
+      </div>
+
+      <!-- 課程名稱 -->
+      <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-black text-soy-cocoa leading-tight tracking-tight mb-6">
+        豆花療癒學：<br class="sm:hidden"><span class="text-soy-caramel">手作古早味與數位微創業</span>
+      </h1>
+
+      <!-- 溫暖副標引言 -->
+      <p class="text-soy-muted text-base sm:text-lg max-w-2xl mx-auto leading-relaxed mb-8">
+        在慢火熬煮的豆香裡安頓身心，在數位鏡頭下紀錄生活美學。<br class="hidden sm:inline">
+        一場跨越世代的甜蜜共學，從一碗手沖豆花開啟你的斜槓與暖心人生。
+      </p>
+
+      <!-- 核心亮點標籤 -->
+      <div class="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3">
+        <span class="px-4 py-2 rounded-2xl bg-white border border-soy-border text-soy-caramel font-medium text-xs sm:text-sm shadow-sm flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-soy-amber"></span>
+          #社會情緒學習(SEL)
+        </span>
+        <span class="px-4 py-2 rounded-2xl bg-white border border-soy-border text-soy-caramel font-medium text-xs sm:text-sm shadow-sm flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-soy-amber"></span>
+          #資訊素養
+        </span>
+        <span class="px-4 py-2 rounded-2xl bg-white border border-soy-border text-soy-caramel font-medium text-xs sm:text-sm shadow-sm flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-soy-amber"></span>
+          #手作療癒
+        </span>
+        <span class="px-4 py-2 rounded-2xl bg-white border border-soy-border text-soy-caramel font-medium text-xs sm:text-sm shadow-sm flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-soy-amber"></span>
+          #數位微創業
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 課程核心資訊區（質感卡片式排版） -->
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-12">
+    
+    <section aria-labelledby="core-info-heading">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="h-7 w-1.5 rounded-full bg-soy-amber"></div>
+        <h2 id="core-info-heading" class="font-serif text-2xl sm:text-3xl font-bold text-soy-cocoa">課程核心資訊</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        
+        <!-- 卡片 1：課程理念 -->
+        <article class="bg-soy-card rounded-3xl p-6 sm:p-7 border border-soy-border shadow-warm hover:shadow-warm-hover transition-all print-break-inside flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-soy-soft text-soy-caramel flex items-center justify-center shrink-0">
+                <i data-lucide="heart-handshake" class="w-5 h-5 text-soy-amber"></i>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-soy-caramel">課程理念</h3>
+            </div>
+            <p class="text-soy-cocoa leading-relaxed text-base">
+              融合傳統手作與數位社群，從一碗綿密豆花培養專注與人際共感。學習網紅行銷與數位工具，成就自我微創業，品味甘醇人生的甜蜜滋味。
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-soy-soft flex items-center justify-between text-xs text-soy-muted">
+            <span>職人手作 × 數位共感</span>
+            <span class="font-medium text-soy-amber">核心精神</span>
+          </div>
+        </article>
+
+        <!-- 卡片 2：課程目標 -->
+        <article class="bg-soy-card rounded-3xl p-6 sm:p-7 border border-soy-border shadow-warm hover:shadow-warm-hover transition-all print-break-inside flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-soy-soft text-soy-caramel flex items-center justify-center shrink-0">
+                <i data-lucide="compass" class="w-5 h-5 text-soy-amber"></i>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-soy-caramel">課程目標</h3>
+            </div>
+            <p class="text-soy-cocoa leading-relaxed text-base">
+              傳承手作豆花技藝結合當代數位趨勢。學習食安知識與烹調理論；掌握黃豆熬煮與配料調製技能；培養耐心職人品德與同理心；透過分享串聯社區情感，共創溫馨在地連結。
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-soy-soft flex items-center justify-between text-xs text-soy-muted">
+            <span>知識・技能・品德・社區</span>
+            <span class="font-medium text-soy-amber">全人發展</span>
+          </div>
+        </article>
+
+        <!-- 卡片 3：條件限制 -->
+        <article class="bg-soy-card rounded-3xl p-6 sm:p-7 border border-soy-border shadow-warm hover:shadow-warm-hover transition-all print-break-inside flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-soy-soft text-soy-caramel flex items-center justify-center shrink-0">
+                <i data-lucide="users" class="w-5 h-5 text-soy-amber"></i>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-soy-caramel">條件限制</h3>
+            </div>
+            <p class="text-soy-cocoa leading-relaxed text-base">
+              招收20至80歲對手作甜品與數位行銷有興趣之學員。無基礎可，歡迎銀髮樂齡與跨世代共學，需自備智慧型手機或平版以利資訊素養操作。
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-soy-soft flex items-center justify-between text-xs text-soy-muted">
+            <span>20–80歲跨齡共學｜零基礎友善</span>
+            <span class="font-medium text-soy-amber">報名資格</span>
+          </div>
+        </article>
+
+        <!-- 卡片 4：授課方式 -->
+        <article class="bg-soy-card rounded-3xl p-6 sm:p-7 border border-soy-border shadow-warm hover:shadow-warm-hover transition-all print-break-inside flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-soy-soft text-soy-caramel flex items-center justify-center shrink-0">
+                <i data-lucide="presentation" class="w-5 h-5 text-soy-amber"></i>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-soy-caramel">授課方式</h3>
+            </div>
+            <p class="text-soy-cocoa leading-relaxed text-base">
+              講師示範與實際操作、團體互動及小組活動、個別指導與反覆練習、案例討論與心得分享、實物觀賞及樣品教學。
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-soy-soft flex items-center justify-between text-xs text-soy-muted">
+            <span>做中學・互動共創</span>
+            <span class="font-medium text-soy-amber">教學法</span>
+          </div>
+        </article>
+
+        <!-- 卡片 5：發展計畫 -->
+        <article class="bg-soy-card rounded-3xl p-6 sm:p-7 border border-soy-border shadow-warm hover:shadow-warm-hover transition-all print-break-inside flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-soy-soft text-soy-caramel flex items-center justify-center shrink-0">
+                <i data-lucide="sprout" class="w-5 h-5 text-soy-amber"></i>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-soy-caramel">發展計畫</h3>
+            </div>
+            <p class="text-soy-cocoa leading-relaxed text-base">
+              未來深化品牌經營與進階多元甜品研發，結合在地小農食材與線上電商平台，擴大跨齡社區共創與青銀共學社群，永續傳承在地人文好滋味。
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-soy-soft flex items-center justify-between text-xs text-soy-muted">
+            <span>在地小農 × 青銀永續</span>
+            <span class="font-medium text-soy-amber">未來藍圖</span>
+          </div>
+        </article>
+
+        <!-- 卡片 6：教學設計（精選週次亮點） -->
+        <article class="bg-gradient-to-br from-soy-soft to-white rounded-3xl p-6 sm:p-7 border-2 border-soy-amber/50 shadow-warm hover:shadow-warm-hover transition-all print-break-inside flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-soy-amber text-white text-[11px] font-bold tracking-wider">
+            精選週次亮點
+          </div>
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-11 h-11 rounded-2xl bg-soy-amber text-white flex items-center justify-center shrink-0 shadow-sm">
+                <i data-lucide="flame" class="w-5 h-5"></i>
+              </div>
+              <h3 class="font-serif text-xl font-bold text-soy-caramel">教學設計</h3>
+            </div>
+            <p class="text-soy-cocoa leading-relaxed text-base">
+              第六週：古早味糖水熬煮與溫度掌控。講師示範焦糖黃金比例與火侯調整技巧，學員分組實作並記錄數據，透過小組品評分享與情緒覺察，掌握完美糖水風味。
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-soy-border/60 flex items-center justify-between text-xs text-soy-caramel font-medium">
+            <span>第6週實作模組示範</span>
+            <span>SEL情緒覺察 × 科學數據</span>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- 3. 18週課程大綱區（互動篩選與響應式表格） -->
+    <section aria-labelledby="syllabus-heading" class="pt-4">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+        <div>
+          <div class="flex items-center gap-3 mb-2">
+            <div class="h-7 w-1.5 rounded-full bg-soy-caramel"></div>
+            <h2 id="syllabus-heading" class="font-serif text-2xl sm:text-3xl font-bold text-soy-cocoa">18週完整課程大綱</h2>
+          </div>
+          <p class="text-soy-muted text-sm sm:text-base">
+            循序漸進從選豆磨漿、糖水配料美學，一路邁向數位攝影、社群經營與實體市集微創業。
+          </p>
+        </div>
+
+        <!-- 關鍵字搜尋框 -->
+        <div class="relative w-full md:w-72 no-print">
+          <i data-lucide="search" class="w-4 h-4 text-soy-muted absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+          <input 
+            type="text" 
+            id="searchInput" 
+            oninput="filterSyllabus()"
+            placeholder="搜尋週次、主題或關鍵字..." 
+            class="w-full pl-10 pr-4 py-2.5 rounded-2xl bg-white border border-soy-border text-sm text-soy-cocoa placeholder:text-soy-muted/70 focus:outline-none focus:ring-2 focus:ring-soy-amber/50 focus:border-soy-amber transition-all shadow-sm"
+          >
+        </div>
+      </div>
+
+      <!-- 分類篩選按鈕列 -->
+      <div class="flex flex-wrap items-center gap-2 mb-6 no-print" role="tablist" aria-label="課程階段篩選">
+        <button onclick="setCategory('all')" data-cat="all" class="filter-btn active px-4 py-2 rounded-2xl text-xs sm:text-sm font-medium transition-all bg-soy-caramel text-white shadow-sm">
+          全部週次 (18週)
+        </button>
+        <button onclick="setCategory('craft')" data-cat="craft" class="filter-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-medium transition-all bg-white text-soy-cocoa border border-soy-border hover:bg-soy-soft">
+          手作技藝篇 (第1-8, 10週)
+        </button>
+        <button onclick="setCategory('digital')" data-cat="digital" class="filter-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-medium transition-all bg-white text-soy-cocoa border border-soy-border hover:bg-soy-soft">
+          數位行銷與創業篇 (第11-16週)
+        </button>
+        <button onclick="setCategory('special')" data-cat="special" class="filter-btn px-4 py-2 rounded-2xl text-xs sm:text-sm font-medium transition-all bg-white text-soy-cocoa border border-soy-border hover:bg-soy-soft">
+          特殊週次 / 成果展 (第9, 17-18週)
+        </button>
+      </div>
+
+      <!-- 響應式表格容器 -->
+      <div class="bg-white rounded-3xl border border-soy-border shadow-warm overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-soy-soft/80 border-b border-soy-border text-soy-caramel font-serif">
+                <th class="py-4 px-4 sm:px-6 text-center w-20 sm:w-24 font-bold text-sm sm:text-base">週</th>
+                <th class="py-4 px-4 sm:px-6 w-1/3 min-w-[180px] font-bold text-sm sm:text-base">主題</th>
+                <th class="py-4 px-4 sm:px-6 font-bold text-sm sm:text-base">內容</th>
+              </tr>
+            </thead>
+            <tbody id="syllabusBody" class="divide-y divide-soy-border/60 text-sm sm:text-base">
+              <!-- 由 JavaScript 動態渲染 18 週資料 -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 無搜尋結果提示 -->
+        <div id="emptyState" class="hidden py-14 px-4 text-center">
+          <div class="w-12 h-12 rounded-full bg-soy-soft text-soy-caramel flex items-center justify-center mx-auto mb-3">
+            <i data-lucide="search-x" class="w-6 h-6"></i>
+          </div>
+          <p class="font-serif text-lg font-bold text-soy-cocoa mb-1">找不到符合條件的課程週次</p>
+          <p class="text-sm text-soy-muted mb-4">請嘗試更換關鍵字，或點選下方按鈕顯示全部週次。</p>
+          <button onclick="resetFilters()" class="px-4 py-2 rounded-xl bg-soy-caramel text-white text-sm font-medium hover:bg-soy-caramel/90 transition-all">
+            重設篩選條件
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 頁尾 -->
+  <footer class="bg-soy-soft/70 border-t border-soy-border py-10 px-4 sm:px-6 lg:px-8 text-center">
+    <div class="max-w-4xl mx-auto">
+      <p class="font-serif font-bold text-soy-caramel text-lg mb-2">彰化社區大學｜18週跨齡共學課程</p>
+      <p class="text-soy-muted text-sm mb-4">豆花療癒學：手作古早味與數位微創業 — 讓一碗豆花溫暖你的生活與社區</p>
+      <div class="inline-flex items-center gap-2 text-xs text-soy-muted/80 bg-white px-4 py-2 rounded-full border border-soy-border">
+        <span>社會情緒學習 (SEL)</span>
+        <span>•</span>
+        <span>資訊素養</span>
+        <span>•</span>
+        <span>青銀共學</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 自訂通知提示框 (Toast Message Box，取代 alert) -->
+  <div id="toastBox" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none no-print">
+    <div class="bg-soy-cocoa text-soy-bg px-5 py-3.5 rounded-2xl shadow-xl flex items-center gap-3 border border-soy-caramel/40">
+      <div class="w-7 h-7 rounded-full bg-soy-amber text-white flex items-center justify-center shrink-0">
+        <i data-lucide="check" class="w-4 h-4"></i>
+      </div>
+      <div>
+        <p id="toastTitle" class="font-bold text-sm">操作成功</p>
+        <p id="toastDesc" class="text-xs text-soy-bg/80">已將完整網頁原始碼複製到剪貼簿</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 完整 18 週課程大綱資料庫（逐字精準對照文字稿）
+    const syllabusData = [
+      {
+        week: 1,
+        category: 'craft',
+        topic: '豆花初相見：黃豆的奇幻旅程與食安知能',
+        content: '介紹豆花歷史文化與營養價值。透過分組破冰建立同理心，認識基改與非基改黃豆挑選標準，培養健康飲食的正確品德態度。'
+      },
+      {
+        week: 2,
+        category: 'craft',
+        topic: '尋找好豆：黃豆浸泡科學與風味探討',
+        content: '深入探討黃豆吸水率與溫度對口感的影響。實作浸泡與清潔流程，學習耐心等待的SEL情緒調節，為完美豆花打下扎實基礎。'
+      },
+      {
+        week: 3,
+        category: 'craft',
+        topic: '黃金研磨術：漿渣分離與職人專注力',
+        content: '學習傳統與現代磨漿技巧，實際操作漿渣分離。在反覆過濾與手感操作中，鍛鍊專注力與抗挫力，體會職人的細膩堅持。'
+      },
+      {
+        week: 4,
+        category: 'craft',
+        topic: '慢火熬煮心：煮漿技巧與安全防焦守則',
+        content: '掌握煮漿火侯控制與防焦防溢技巧。分組討論團隊合作分工，學習面對突發狀況的應變能力，培養互助合作的良好態度。'
+      },
+      {
+        week: 5,
+        category: 'craft',
+        topic: '凝結的魔法：天然凝固劑比例與化學奧秘',
+        content: '認識石膏、洋菜與葡萄糖酸內酯的特性與比例原理。動手實作凝固實驗，觀察質地變化，培養科學探究精神與嚴謹的態度。'
+      },
+      {
+        week: 6,
+        category: 'craft',
+        highlight: true,
+        topic: '古早味糖水熬煮與溫度掌控',
+        content: '講師示範焦糖黃金比例與火侯調整技巧，學員分組實作並記錄數據，透過小組品評分享與情緒覺察，掌握完美糖水風味。'
+      },
+      {
+        week: 7,
+        category: 'craft',
+        topic: '繽紛配料坊：手工芋圓與Q彈地瓜圓製作',
+        content: '學習傳統地瓜圓與芋圓製作秘訣。動手搓揉揉捏，釋放壓力與療癒身心，並探討在地農產品對社區農業的支持與連結。'
+      },
+      {
+        week: 8,
+        category: 'craft',
+        topic: '甜蜜點綴：蜜紅豆與古早味珍珠熬煮技巧',
+        content: '掌握紅豆綿密不破皮的熬煮關鍵。透過小組分享各自喜愛的古早味記憶，增進跨世代學員的情感交流與同理傾聽能力。'
+      },
+      {
+        week: 9,
+        category: 'special',
+        isCivicWeek: true,
+        topic: '公民素養週',
+        content: '由彰化社區大學安排'
+      },
+      {
+        week: 10,
+        category: 'craft',
+        topic: '手作美學：碗盤配置與療癒擺盤藝術',
+        content: '探討色彩搭配與視覺美學。學習如何將一碗豆花呈現出精緻質感，透過互賞作品建立正向回饋，增進自信與美感素養。'
+      },
+      {
+        week: 11,
+        category: 'digital',
+        topic: '數位新視界：手機美食攝影構圖與光影捕捉',
+        content: '運用智慧型手機學習食物攝影技巧。探索光線、角度與背景搭配，掌握數位工具基本操作，記錄專屬於自己的美味創作。'
+      },
+      {
+        week: 12,
+        category: 'digital',
+        topic: '一秒吸睛：修圖軟體與短文案撰寫技巧',
+        content: '介紹手機修圖App與吸引人的IG/FB短文案寫法。結合自身情感故事書寫貼文，提升圖文資訊素養與社群表達能力。'
+      },
+      {
+        week: 13,
+        category: 'digital',
+        topic: '數位行銷起步走：社群平台粉專建立與經營',
+        content: '學習建立個人或小組的豆花品牌社群專頁。探討網路禮儀與資訊安全概念，培養負責任的數位公民素養。'
+      },
+      {
+        week: 14,
+        category: 'digital',
+        topic: '世代共融：社區分享與長者同理服務體驗',
+        content: '設計長者友善的送餐與互動服務流程。透過同理心演練與溝通技巧，增進個人與社區長者之溫暖連結。'
+      },
+      {
+        week: 15,
+        category: 'digital',
+        topic: '微創業模擬：成本計算與定價策略工作坊',
+        content: '學習食材成本核算、損益平衡與合理定價策略。小組討論市場定位，培養理性思維與生活經濟素養。'
+      },
+      {
+        week: 16,
+        category: 'digital',
+        topic: '實戰演練：一日快閃豆花攤分工與擺攤實作',
+        content: '模擬真實市集擺攤，分工合作完成豆花製作、招呼顧客與金流處理。考驗團隊合作、抗壓性與即時解決問題的能力。'
+      },
+      {
+        week: 17,
+        category: 'special',
+        topic: '成果檢討與心路歷程分享發表會',
+        content: '總結17週以來的學習收穫。透過小組反思、心得分享與互相回饋，肯定彼此成長，凝聚深厚的班級情感。'
+      },
+      {
+        week: 18,
+        category: 'special',
+        isShowcase: true,
+        topic: '甜蜜大豐收：成果展暨手作豆花分享市集',
+        content: '舉辦期末成果展，邀請親友與社區民眾一同品嚐學員親手製作的豆花，展現學習成果與社區連結的溫馨成果。'
+      }
+    ];
+
+    let currentCategory = 'all';
+
+    // 渲染表格列
+    function renderSyllabus(data) {
+      const tbody = document.getElementById('syllabusBody');
+      const emptyState = document.getElementById('emptyState');
+
+      if (data.length === 0) {
+        tbody.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      tbody.innerHTML = data.map(item => {
+        // 特殊週次樣式區分
+        let rowBg = 'hover:bg-soy-soft/40 transition-colors';
+        let badgeClass = 'bg-soy-soft text-soy-caramel border border-soy-border';
+        let topicExtra = '';
+
+        if (item.isCivicWeek) {
+          rowBg = 'bg-amber-50/60 hover:bg-amber-50 transition-colors';
+          badgeClass = 'bg-amber-100 text-amber-900 border border-amber-300';
+        } else if (item.isShowcase) {
+          rowBg = 'bg-orange-50/70 hover:bg-orange-50 transition-colors';
+          badgeClass = 'bg-soy-amber text-white border border-soy-amber';
+          topicExtra = '<span class="inline-block ml-2 px-2 py-0.5 text-[11px] rounded-full bg-soy-amber/15 text-soy-caramel font-sans font-bold align-middle">期末成果展</span>';
+        } else if (item.highlight) {
+          rowBg = 'bg-soy-soft/30 hover:bg-soy-soft/60 transition-colors';
+          topicExtra = '<span class="inline-block ml-2 px-2 py-0.5 text-[11px] rounded-full bg-soy-caramel/10 text-soy-caramel font-sans font-medium align-middle">教學設計示範週</span>';
+        }
+
+        return `
+          <tr class="${rowBg} print-break-inside">
+            <td class="py-4 px-4 sm:px-6 text-center align-top">
+              <span class="inline-flex items-center justify-center w-9 h-9 rounded-full font-serif font-bold text-sm ${badgeClass}">
+                ${item.week}
+              </span>
+            </td>
+            <td class="py-4 px-4 sm:px-6 align-top font-serif font-bold text-soy-cocoa leading-snug">
+              ${item.topic}${topicExtra}
+            </td>
+            <td class="py-4 px-4 sm:px-6 align-top text-soy-cocoa/90 leading-relaxed">
+              ${item.content}
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // 設定篩選分類
+    function setCategory(cat) {
+      currentCategory = cat;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.dataset.cat === cat) {
+          btn.classList.remove('bg-white', 'text-soy-cocoa', 'border', 'border-soy-border', 'hover:bg-soy-soft');
+          btn.classList.add('bg-soy-caramel', 'text-white', 'shadow-sm');
+        } else {
+          btn.classList.remove('bg-soy-caramel', 'text-white', 'shadow-sm');
+          btn.classList.add('bg-white', 'text-soy-cocoa', 'border', 'border-soy-border', 'hover:bg-soy-soft');
+        }
+      });
+      filterSyllabus();
+    }
+
+    // 執行篩選與搜尋
+    function filterSyllabus() {
+      const keyword = document.getElementById('searchInput').value.trim().toLowerCase();
+      const filtered = syllabusData.filter(item => {
+        const matchCat = currentCategory === 'all' || item.category === currentCategory;
+        const matchKeyword = !keyword || 
+          item.topic.toLowerCase().includes(keyword) || 
+          item.content.toLowerCase().includes(keyword) ||
+          `第${item.week}週`.includes(keyword) ||
+          String(item.week) === keyword;
+        return matchCat && matchKeyword;
+      });
+      renderSyllabus(filtered);
+    }
+
+    // 重設篩選
+    function resetFilters() {
+      document.getElementById('searchInput').value = '';
+      setCategory('all');
+    }
+
+    // 顯示自訂訊息提示框
+    function showToast(title, desc) {
+      const toast = document.getElementById('toastBox');
+      document.getElementById('toastTitle').textContent = title;
+      document.getElementById('toastDesc').textContent = desc;
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3200);
+    }
+
+    // 一鍵複製完整 HTML 原始碼（使用 execCommand 確保 iFrame 環境相容）
+    function copySourceCode() {
+      try {
+        const fullHtml = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+        const textarea = document.createElement('textarea');
+        textarea.value = fullHtml;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textarea);
+
+        if (successful) {
+          showToast('複製成功！', '已將完整網頁 HTML 原始碼複製到剪貼簿。');
+        } else {
+          showToast('複製失敗', '請手動選取並複製程式碼。');
+        }
+      } catch (err) {
+        showToast('複製發生錯誤', '請稍後再試或直接檢視原始碼。');
+      }
+    }
+
+    // 初始化頁面
+    window.addEventListener('DOMContentLoaded', () => {
+      renderSyllabus(syllabusData);
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
