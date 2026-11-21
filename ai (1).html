@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>讓AI解決我的生活大小事｜彰化社區大學</title>
+    <!-- 引入 Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入 Google Fonts: Noto Sans TC & Noto Serif TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+    <!-- 引入 Font Awesome 圖示 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                        serif: ['"Noto Serif TC"', 'serif'],
+                    },
+                    colors: {
+                        warmBg: '#FDFBF7',
+                        warmCard: '#FFFFFF',
+                        warmAccent: '#E87A3E',
+                        warmAmber: '#F5A623',
+                        charcoal: '#2D2A26',
+                        mutedText: '#665F57',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* 自訂光暈與微動畫，營造週末午後陽光與AI魔法交織的氛圍 */
+        body {
+            background-color: #FDFBF7;
+            color: #2D2A26;
+            overflow-x: hidden;
+        }
+        .sunlight-glow {
+            background: radial-gradient(circle at 20% 20%, rgba(245, 166, 35, 0.18) 0%, rgba(232, 122, 62, 0.08) 45%, transparent 70%);
+        }
+        .ai-magic-glow {
+            background: radial-gradient(circle at 80% 30%, rgba(139, 92, 246, 0.12) 0%, rgba(56, 189, 248, 0.08) 40%, transparent 70%);
+        }
+        .card-hover {
+            transition: all 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 35px -10px rgba(232, 122, 62, 0.16), 0 8px 15px -6px rgba(139, 92, 246, 0.1);
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float {
+            animation: floatSlow 5s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-orange-200 selection:text-charcoal relative">
+
+    <!-- 背景裝飾光暈 -->
+    <div class="fixed inset-0 pointer-events-none sunlight-glow z-0"></div>
+    <div class="fixed inset-0 pointer-events-none ai-magic-glow z-0"></div>
+
+    <!-- 頂部導覽列 -->
+    <nav class="sticky top-0 z-40 backdrop-blur-md bg-[#FDFBF7]/85 border-b border-orange-100/80">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-2.5">
+                <span class="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 text-white flex items-center justify-center shadow-sm">
+                    <i class="fa-solid fa-sparkles text-sm"></i>
+                </span>
+                <span class="font-bold text-base sm:text-lg tracking-wide text-charcoal">彰化社區大學</span>
+            </div>
+            <div class="flex items-center space-x-3 sm:space-x-6 text-sm font-medium text-mutedText">
+                <a href="#story" class="hover:text-warmAccent transition-colors">講師心聲</a>
+                <a href="#showcase" class="hover:text-warmAccent transition-colors">AI魔法成果</a>
+                <a href="#guestbook" class="px-3.5 py-1.5 rounded-full bg-orange-100/80 text-warmAccent hover:bg-warmAccent hover:text-white transition-all">課堂留言</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1. 頂部主視覺區 (Hero Section) -->
+    <header class="relative z-10 pt-14 pb-16 sm:pt-20 sm:pb-24 px-4 sm:px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <!-- 課程副標題徽章 -->
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-white/90 border border-orange-200/80 shadow-sm mb-6 animate-float">
+                <span class="w-2 h-2 rounded-full bg-warmAccent animate-ping"></span>
+                <span class="text-xs sm:text-sm font-medium tracking-wider text-warmAccent">
+                    彰化社區大學｜AI初階探索之旅
+                </span>
+            </div>
+
+            <!-- 課程大標題 -->
+            <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-bold text-charcoal leading-tight tracking-tight mb-6">
+                讓<span class="bg-gradient-to-r from-orange-500 via-amber-500 to-purple-600 bg-clip-text text-transparent">AI</span>解決我的生活大小事
+            </h1>
+
+            <p class="text-base sm:text-lg text-mutedText max-w-2xl mx-auto leading-relaxed mb-10">
+                打破年齡與數位落差的界線，在每個溫暖的週末午後，一起用好奇心點亮生活創意的魔法。
+            </p>
+
+            <!-- 授課資訊標籤列 -->
+            <div class="flex flex-wrap justify-center gap-3 sm:gap-4 max-w-3xl mx-auto">
+                <div class="flex items-center space-x-2.5 bg-white px-5 py-3 rounded-2xl shadow-sm border border-orange-100">
+                    <div class="w-8 h-8 rounded-full bg-orange-50 text-warmAccent flex items-center justify-center">
+                        <i class="fa-solid fa-chalkboard-user text-sm"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-[11px] text-mutedText">課程講師</div>
+                        <div class="text-sm font-bold text-charcoal">李信賢（49歲）</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2.5 bg-white px-5 py-3 rounded-2xl shadow-sm border border-orange-100">
+                    <div class="w-8 h-8 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center">
+                        <i class="fa-regular fa-sun text-sm"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-[11px] text-mutedText">上課時間</div>
+                        <div class="text-sm font-bold text-charcoal">每週六下午</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2.5 bg-white px-5 py-3 rounded-2xl shadow-sm border border-orange-100">
+                    <div class="w-8 h-8 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center">
+                        <i class="fa-solid fa-location-dot text-sm"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="text-[11px] text-mutedText">授課地點</div>
+                        <div class="text-sm font-bold text-charcoal">彰化社區大學</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. 講師心聲與故事區塊 -->
+    <section id="story" class="relative z-10 py-10 sm:py-16 px-4 sm:px-6">
+        <div class="max-w-3xl mx-auto">
+            <article class="bg-white/95 backdrop-blur-sm rounded-3xl p-7 sm:p-12 shadow-[0_12px_40px_-15px_rgba(45,42,38,0.08)] border border-orange-100/90 relative overflow-hidden">
+                <!-- 右上角裝飾書籤 -->
+                <div class="absolute top-0 right-8 w-12 h-14 bg-gradient-to-b from-orange-400 to-amber-500 rounded-b-2xl flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-feather-pointed text-lg"></i>
+                </div>
+
+                <!-- 專欄小標 -->
+                <div class="flex items-center space-x-3 mb-8">
+                    <span class="h-px w-8 bg-warmAccent"></span>
+                    <span class="text-xs sm:text-sm font-bold tracking-widest text-warmAccent uppercase">LECTURER'S STORY · 講台上的感動</span>
+                </div>
+
+                <!-- 完整講師自述文字稿 -->
+                <div id="speech-content" class="space-y-6 text-base sm:text-lg text-charcoal/90 leading-[1.95] font-normal tracking-wide">
+                    <p class="first-letter:text-4xl first-letter:font-serif first-letter:font-bold first-letter:text-warmAccent first-letter:mr-1.5 first-letter:float-left">
+                        大家好，我是李信賢，今年49歲。每個週六下午，我都會準時出現在彰化社區大學，帶領一群充滿熱情的學員，開啟「讓AI解決我的生活大小事」的初階探索之旅。
+                    </p>
+                    <p>
+                        站在講台上，最令我動容的，從來不是冷冰冰的技術參數，而是學員們眼中閃爍的光芒。從一開始面對新科技的生疏與忐忑，到後來能自信地輸入指令，看著文字稿流暢誕生、驚豔的圖像躍然紙上，甚至親手創作出專屬的影片、音樂與網頁程式。每一次的嘗試與突破，都打破了年齡與數位落差的界線。
+                    </p>
+                    <p>
+                        AI不只是工具，更是點亮生活創意的魔法。在彰化社大的每個週末午後，我看見了終身學習最美的風景，這份共同成長的感動，將永遠深印在我心中。
+                    </p>
+                </div>
+
+                <!-- 重點金句引用框 -->
+                <div class="my-9 p-6 sm:p-8 rounded-2xl bg-gradient-to-r from-orange-50 via-amber-50/70 to-purple-50/60 border-l-4 border-warmAccent relative">
+                    <i class="fa-solid fa-quote-left text-2xl text-orange-300/80 mb-2 block"></i>
+                    <blockquote class="font-serif text-xl sm:text-2xl font-bold text-charcoal leading-snug">
+                        「AI不只是工具，更是點亮生活創意的魔法。」
+                    </blockquote>
+                    <p class="text-xs sm:text-sm text-mutedText mt-3">—— 李信賢 老師｜彰化社區大學 週六午後課堂筆記</p>
+                </div>
+
+                <!-- 底部操作列：一鍵複製完整講稿 -->
+                <div class="pt-4 border-t border-stone-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-11 h-11 rounded-full bg-gradient-to-tr from-orange-500 to-amber-400 text-white font-serif font-bold flex items-center justify-center text-lg shadow-sm">
+                            李
+                        </div>
+                        <div>
+                            <div class="font-bold text-charcoal text-sm sm:text-base">李信賢 老師</div>
+                            <div class="text-xs text-mutedText">彰化社區大學 AI 課程講師</div>
+                        </div>
+                    </div>
+
+                    <button id="copy-btn" onclick="copySpeechText()" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-5 py-2.5 rounded-xl bg-charcoal hover:bg-warmAccent text-white text-sm font-medium transition-all duration-300 shadow-sm active:scale-95 cursor-pointer">
+                        <i class="fa-regular fa-copy"></i>
+                        <span id="copy-btn-text">一鍵複製完整講稿</span>
+                    </button>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 3. 學員創作成果魔法展示區 (Interactive Showcase) -->
+    <section id="showcase" class="relative z-10 py-14 sm:py-20 px-4 sm:px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="text-xs sm:text-sm font-bold tracking-widest text-warmAccent uppercase">CREATIVE BREAKTHROUGHS</span>
+                <h2 class="font-serif text-2xl sm:text-4xl font-bold text-charcoal mt-2 mb-3">
+                    學員的五大 AI 創作魔法
+                </h2>
+                <p class="text-sm sm:text-base text-mutedText max-w-xl mx-auto">
+                    點擊或懸停下方卡片，看看學員們如何從生疏忐忑，一步步創作出令人驚豔的專屬作品！
+                </p>
+            </div>
+
+            <!-- 五張精美互動卡片網格 -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- 卡片 1：文字稿 -->
+                <div onclick="toggleCardDetail(this)" class="card-hover group bg-white rounded-3xl p-7 border border-orange-100/80 shadow-sm cursor-pointer relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-50 text-orange-500 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-orange-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-pen-nib"></i>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-charcoal">流暢誕生的「文字稿」</h3>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-orange-50 text-orange-600 font-medium">第一步突破</span>
+                    </div>
+                    <p class="text-sm text-mutedText leading-relaxed mb-4">
+                        從不知如何下筆，到學會精準輸入指令，讓生活隨筆、活動企劃與溫馨祝福語流暢誕生。
+                    </p>
+                    <div class="pt-3 border-t border-orange-50 text-xs font-medium text-warmAccent flex items-center justify-between">
+                        <span>✨ 老師鼓勵小語</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300 group-hover:translate-y-0.5"></i>
+                    </div>
+                    <div class="encouragement-box hidden mt-3 p-3.5 rounded-xl bg-orange-50/80 text-xs sm:text-sm text-charcoal leading-relaxed">
+                        「當你打出第一個指令、看見螢幕回應的那一刻，你就已經跨越了數位門檻！」
+                    </div>
+                </div>
+
+                <!-- 卡片 2：圖像 -->
+                <div onclick="toggleCardDetail(this)" class="card-hover group bg-white rounded-3xl p-7 border border-amber-100/80 shadow-sm cursor-pointer relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-palette"></i>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-charcoal">躍然紙上的「圖像」</h3>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 font-medium">視覺魔法</span>
+                    </div>
+                    <p class="text-sm text-mutedText leading-relaxed mb-4">
+                        把腦海中的想像化為色彩斑斕的插畫、LINE 貼圖與生活海報，每一張都讓教室驚呼連連。
+                    </p>
+                    <div class="pt-3 border-t border-amber-50 text-xs font-medium text-amber-600 flex items-center justify-between">
+                        <span>✨ 老師鼓勵小語</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300 group-hover:translate-y-0.5"></i>
+                    </div>
+                    <div class="encouragement-box hidden mt-3 p-3.5 rounded-xl bg-amber-50/80 text-xs sm:text-sm text-charcoal leading-relaxed">
+                        「不會畫畫也沒關係，你的生活閱歷與想像力，就是最棒的畫筆！」
+                    </div>
+                </div>
+
+                <!-- 卡片 3：影片 -->
+                <div onclick="toggleCardDetail(this)" class="card-hover group bg-white rounded-3xl p-7 border border-rose-100/80 shadow-sm cursor-pointer relative overflow-hidden">
+                    <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-rose-500 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-film"></i>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-charcoal">生動說故事的「影片」</h3>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 font-medium">動態記憶</span>
+                    </div>
+                    <p class="text-sm text-mutedText leading-relaxed mb-4">
+                        讓靜態老照片動起來，結合旁白與轉場，親手剪輯出記錄家庭與社區溫度的專屬短片。
+                    </p>
+                    <div class="pt-3 border-t border-rose-50 text-xs font-medium text-rose-500 flex items-center justify-between">
+                        <span>✨ 老師鼓勵小語</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300 group-hover:translate-y-0.5"></i>
+                    </div>
+                    <div class="encouragement-box hidden mt-3 p-3.5 rounded-xl bg-rose-50/80 text-xs sm:text-sm text-charcoal leading-relaxed">
+                        「看見學員把回憶變成會動的影片，眼裡閃爍的成就感比任何特效都動人。」
+                    </div>
+                </div>
+
+                <!-- 卡片 4：音樂 -->
+                <div onclick="toggleCardDetail(this)" class="card-hover group bg-white rounded-3xl p-7 border border-purple-100/80 shadow-sm cursor-pointer relative overflow-hidden sm:col-span-1 lg:col-start-1 lg:ml-auto lg:w-full">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300">
+                        <i class="fa-solid fa-music"></i>
+                    </div>
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-xl font-bold text-charcoal">觸動心弦的「音樂」</h3>
+                        <span class="text-xs px-2.5 py-1 rounded-full bg-purple-50 text-purple-600 font-medium">旋律創作</span>
+                    </div>
+                    <p class="text-sm text-mutedText leading-relaxed mb-4">
+                        寫下屬於自己的歌詞，透過 AI 譜出輕快或抒情的旋律，在週六午後的教室裡共同聆聽感動。
+                    </p>
+                    <div class="pt-3 border-t border-purple-50 text-xs font-medium text-purple-600 flex items-center justify-between">
+                        <span>✨ 老師鼓勵小語</span>
+                        <i class="fa-solid fa-chevron-down transition-transform duration-300 group-hover:translate-y-0.5"></i>
+                    </div>
+                    <div class="encouragement-box hidden mt-3 p-3.5 rounded-xl bg-purple-50/80 text-xs sm:text-sm text-charcoal leading-relaxed">
+                        「每個人心裡都有一首歌，AI 幫我們把心底的故事唱了出來。」
+                    </div>
+                </div>
+
+                <!-- 卡片 5：網頁程式 -->
+                <div onclick="toggleCardDetail(this)" class="card-hover group bg-white rounded-3xl p-7 border border-sky-100/80 shadow-sm cursor-pointer relative overflow-hidden sm:col-span-2 lg:col-span-2">
+                    <div class="flex flex-col md:flex-row md:items-start gap-5">
+                        <div class="w-14 h-14 shrink-0 rounded-2xl bg-sky-50 text-sky-600 flex items-center justify-center text-2xl group-hover:scale-110 group-hover:bg-sky-600 group-hover:text-white transition-all duration-300">
+                            <i class="fa-solid fa-code"></i>
+                        </div>
+                        <div class="flex-1">
+                            <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                <h3 class="text-xl font-bold text-charcoal">親手打造的「網頁程式」</h3>
+                                <span class="text-xs px-2.5 py-1 rounded-full bg-sky-50 text-sky-600 font-medium">終極成就解鎖</span>
+                            </div>
+                            <p class="text-sm text-mutedText leading-relaxed mb-4">
+                                就像您現在瀏覽的這個網頁一樣！即使沒有程式背景，學員也能透過自然語言與 AI 協作，親手打造出互動小工具與個人專屬網頁，徹底打破數位落差的界線。
+                            </p>
+                            <div class="pt-3 border-t border-sky-50 text-xs font-medium text-sky-600 flex items-center justify-between">
+                                <span>✨ 老師鼓勵小語（點擊展開）</span>
+                                <i class="fa-solid fa-chevron-down transition-transform duration-300 group-hover:translate-y-0.5"></i>
+                            </div>
+                            <div class="encouragement-box hidden mt-3 p-3.5 rounded-xl bg-sky-50/80 text-xs sm:text-sm text-charcoal leading-relaxed">
+                                「從零到一做出自己的網頁程式，證明了學習永遠不嫌晚，好奇心就是最強的超能力！」
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 互動式「給老師的一句話 / 學習感想留言板」 -->
+    <section id="guestbook" class="relative z-10 py-14 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-transparent to-orange-50/60">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-white rounded-3xl p-7 sm:p-10 shadow-sm border border-orange-100">
+                <div class="text-center mb-8">
+                    <span class="inline-block px-3 py-1 rounded-full bg-orange-100/70 text-warmAccent text-xs font-bold mb-2">
+                        CLASSROOM WALL · 週六午後交流牆
+                    </span>
+                    <h2 class="font-serif text-2xl sm:text-3xl font-bold text-charcoal">
+                        給李信賢老師的一句話 & 學習感想
+                    </h2>
+                    <p class="text-sm text-mutedText mt-2">
+                        記錄下你在彰化社大課堂上的第一次嘗試、突破或想對老師說的感謝！
+                    </p>
+                </div>
+
+                <!-- 留言輸入表單 -->
+                <form id="message-form" onsubmit="addMessage(event)" class="bg-[#FDFBF7] p-5 sm:p-6 rounded-2xl border border-orange-100/80 mb-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                        <div>
+                            <label for="student-name" class="block text-xs font-bold text-charcoal mb-1.5">學員稱呼</label>
+                            <input type="text" id="student-name" required placeholder="例如：陳大姐、王大哥" class="w-full px-4 py-2.5 rounded-xl bg-white border border-orange-200/80 text-sm focus:outline-none focus:border-warmAccent transition-colors">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label for="student-tag" class="block text-xs font-bold text-charcoal mb-1.5">最喜歡的 AI 魔法</label>
+                            <select id="student-tag" class="w-full px-4 py-2.5 rounded-xl bg-white border border-orange-200/80 text-sm focus:outline-none focus:border-warmAccent transition-colors">
+                                <option value="文字稿創作">✍️ 流暢誕生的文字稿</option>
+                                <option value="AI 圖像生成">🎨 躍然紙上的驚豔圖像</option>
+                                <option value="AI 影片剪輯">🎬 生動說故事的影片</option>
+                                <option value="AI 音樂創作">🎵 觸動心弦的專屬音樂</option>
+                                <option value="網頁程式設計">💻 親手打造的網頁程式</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label for="student-note" class="block text-xs font-bold text-charcoal mb-1.5">想說的話或學習突破心得</label>
+                        <textarea id="student-note" rows="2" required placeholder="寫下您這週的學習感動或對老師的感謝..." class="w-full px-4 py-2.5 rounded-xl bg-white border border-orange-200/80 text-sm focus:outline-none focus:border-warmAccent transition-colors"></textarea>
+                    </div>
+                    <div class="flex justify-end">
+                        <button type="submit" class="inline-flex items-center space-x-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white text-sm font-bold shadow-sm transition-all active:scale-95 cursor-pointer">
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
+                            <span>張貼溫暖留言</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- 留言展示清單 -->
+                <div id="messages-list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- 預設範例留言 1 -->
+                    <div class="p-5 rounded-2xl bg-orange-50/40 border border-orange-100/80">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-sm text-charcoal">林美惠 學員</span>
+                            <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-white text-warmAccent border border-orange-100">🎨 AI 圖像生成</span>
+                        </div>
+                        <p class="text-sm text-charcoal/85 leading-relaxed">
+                            謝謝李老師每個週六下午都這麼有耐心地指導！原本很怕按錯鍵，現在已經會自己做早安圖和貼圖傳給孫子看了，真的很有成就感！
+                        </p>
+                    </div>
+
+                    <!-- 預設範例留言 2 -->
+                    <div class="p-5 rounded-2xl bg-purple-50/40 border border-purple-100/80">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-sm text-charcoal">張志明 學員</span>
+                            <span class="text-[11px] px-2.5 py-0.5 rounded-full bg-white text-purple-600 border border-purple-100">💻 網頁程式設計</span>
+                        </div>
+                        <p class="text-sm text-charcoal/85 leading-relaxed">
+                            從來沒想過快退休的年紀還能親手做出網頁程式！老師說得對，AI 真的是點亮生活創意的魔法，期待每週六來彰化社大上課。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁尾 -->
+    <footer class="relative z-10 py-10 px-4 text-center border-t border-orange-100/80 bg-white/60">
+        <p class="font-serif text-base font-bold text-charcoal mb-1">彰化社區大學｜讓AI解決我的生活大小事</p>
+        <p class="text-xs text-mutedText">講師：李信賢（49歲） · 週六下午 · 終身學習最美的風景</p>
+    </footer>
+
+    <!-- 自訂提示訊息框 (取代 alert) -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-2xl bg-charcoal text-white text-sm font-medium shadow-xl flex items-center space-x-2.5 opacity-0 pointer-events-none transition-all duration-300 translate-y-3">
+        <i class="fa-solid fa-circle-check text-amber-400"></i>
+        <span id="toast-message">已成功複製完整講稿！</span>
+    </div>
+
+    <script>
+        // 完整講師文字稿（用於一鍵複製功能，確保一字不漏）
+        const fullSpeechText = `大家好，我是李信賢，今年49歲。每個週六下午，我都會準時出現在彰化社區大學，帶領一群充滿熱情的學員，開啟「讓AI解決我的生活大小事」的初階探索之旅。
+
+站在講台上，最令我動容的，從來不是冷冰冰的技術參數，而是學員們眼中閃爍的光芒。從一開始面對新科技的生疏與忐忑，到後來能自信地輸入指令，看著文字稿流暢誕生、驚豔的圖像躍然紙上，甚至親手創作出專屬的影片、音樂與網頁程式。每一次的嘗試與突破，都打破了年齡與數位落差的界線。
+
+AI不只是工具，更是點亮生活創意的魔法。在彰化社大的每個週末午後，我看見了終身學習最美的風景，這份共同成長的感動，將永遠深印在我心中。`;
+
+        // 顯示自訂提示訊息框
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-message');
+            toastMsg.textContent = msg;
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-3');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-3');
+                toast.classList.remove('opacity-100', 'translate-y-0');
+            }, 3000);
+        }
+
+        // 一鍵複製完整講稿（使用相容 iFrame 的 document.execCommand('copy')）
+        function copySpeechText() {
+            const textarea = document.createElement('textarea');
+            textarea.value = fullSpeechText;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                const btnText = document.getElementById('copy-btn-text');
+                btnText.textContent = '已複製完整講稿！';
+                showToast('已將李信賢老師的完整文字稿複製到剪貼簿！');
+                
+                setTimeout(() => {
+                    btnText.textContent = '一鍵複製完整講稿';
+                }, 2500);
+            } catch (err) {
+                showToast('複製失敗，請手動選取文字複製。');
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
+
+        // 切換五大 AI 成果卡片的老師鼓勵小語
+        function toggleCardDetail(cardElement) {
+            const box = cardElement.querySelector('.encouragement-box');
+            const icon = cardElement.querySelector('.fa-chevron-down');
+            if (box) {
+                const isHidden = box.classList.contains('hidden');
+                if (isHidden) {
+                    box.classList.remove('hidden');
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                } else {
+                    box.classList.add('hidden');
+                    if (icon) icon.style.transform = 'rotate(0deg)';
+                }
+            }
+        }
+
+        // 新增學員留言到交流牆
+        function addMessage(event) {
+            event.preventDefault();
+            const nameInput = document.getElementById('student-name');
+            const tagInput = document.getElementById('student-tag');
+            const noteInput = document.getElementById('student-note');
+
+            const name = nameInput.value.trim();
+            const tag = tagInput.value;
+            const note = noteInput.value.trim();
+
+            if (!name || !note) return;
+
+            const list = document.getElementById('messages-list');
+            const card = document.createElement('div');
+            card.className = 'p-5 rounded-2xl bg-amber-50/50 border border-amber-200/80 transition-all duration-500';
+            
+            // 安全建立 DOM 避免 XSS
+            const headerDiv = document.createElement('div');
+            headerDiv.className = 'flex items-center justify-between mb-2';
+
+            const nameSpan = document.createElement('span');
+            nameSpan.className = 'font-bold text-sm text-charcoal';
+            nameSpan.textContent = name;
+
+            const tagSpan = document.createElement('span');
+            tagSpan.className = 'text-[11px] px-2.5 py-0.5 rounded-full bg-white text-warmAccent border border-orange-100';
+            tagSpan.textContent = tag;
+
+            headerDiv.appendChild(nameSpan);
+            headerDiv.appendChild(tagSpan);
+
+            const contentP = document.createElement('p');
+            contentP.className = 'text-sm text-charcoal/85 leading-relaxed';
+            contentP.textContent = note;
+
+            card.appendChild(headerDiv);
+            card.appendChild(contentP);
+
+            // 插入到最前方
+            list.insertBefore(card, list.firstChild);
+
+            // 清空表單並提示
+            nameInput.value = '';
+            noteInput.value = '';
+            showToast('感謝您的溫暖分享，留言已張貼！');
+        }
+    </script>
+</body>
+</html>
